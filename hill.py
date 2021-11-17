@@ -11,12 +11,10 @@ def extEucAlg(a, b):
     d, x = a, x2
     return d, x
 
-
 def checkKey(matrix, modulo):
     determinant = getMatrixDeterminant(matrix)
     d, x = extEucAlg(determinant, modulo)
     return d == 1
-
 
 def matrixMultiply(M1, M2):
     transp_M2 = transposeMatrix(M2)
@@ -25,14 +23,11 @@ def matrixMultiply(M1, M2):
     else:
         return [[sum(ele_M1 * ele_M2 for ele_M1, ele_M2 in zip(row_M1, col_M2)) for col_M2 in transp_M2] for row_M1 in M1]
 
-
 def transposeMatrix(m):
     return list(map(list, zip(*m)))
 
-
 def getMatrixMinor(m, i, j):
     return [row[:j] + row[j + 1:] for row in (m[:i] + m[i + 1:])]
-
 
 def getMatrixDeterminant(m):
     if len(m) == 2:
@@ -41,7 +36,6 @@ def getMatrixDeterminant(m):
     for c in range(len(m)):
         determinant += ((-1) ** c) * m[0][c] * getMatrixDeterminant(getMatrixMinor(m, 0, c))
     return determinant
-
 
 def getAlgebraicComplement(m):
     if len(m) == 2:
@@ -55,7 +49,6 @@ def getAlgebraicComplement(m):
         cofactors.append(cofactorRow)
     return cofactors
 
-
 def reverseMatrix(matrix, modulo):
     determinant = getMatrixDeterminant(matrix)
     algebraicComplement = getAlgebraicComplement(matrix)
@@ -63,7 +56,6 @@ def reverseMatrix(matrix, modulo):
     reversedDeterminant = coefficient % modulo
     reversedMatrix = transposeMatrix([[(element * reversedDeterminant) % modulo for element in block] for block in algebraicComplement])
     return reversedMatrix
-
 
 def hillCypher(key, message, action):
     matrixSize = int(sqrt(len(key)))
@@ -86,7 +78,6 @@ def hillCypher(key, message, action):
             for element in block:
                 encrypted += alphabet[element % len(alphabet)]
         return encrypted
-
     elif action == 'd':
         decrypted = ''
         decryptedBlocks = []
@@ -97,7 +88,6 @@ def hillCypher(key, message, action):
             for element in block:
                 decrypted += alphabet[element % len(alphabet)]
         return ' '.join(decrypted.split())
-
 
 def main():
     action = input('Введите e, если хотите зашифровать сообщение и d, если расшифровать: ')
