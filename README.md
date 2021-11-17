@@ -1,5 +1,5 @@
-simpleSubstitution.py - моноалфавитный шифр
-affine.py, affine_reccurent.py - аффинный шифр и его рекуррентная версия
-hill.py, hill_recurrent.py - шифр Хилла и его рекуррентная версия
-rsa.py - алгоритм RSA
-dsa.py - алгоритм цифровой подписи
+<b>simpleSubstitution.py</b> - моноалфавитный шифр <br />
+<b>affine.py</b>, <b>affine_reccurent.py</b> - аффинный шифр и его рекуррентная версия <br />
+<b>hill.py</b>, <b>hill_recurrent.py</b> - шифр Хилла и его рекуррентная версия <br />
+<b>rsa.py</b> - алгоритм RSA <br />
+<b>dsa.py</b> - алгоритм цифровой подписи <br />
