@@ -11,12 +11,10 @@ def extEucAlg(a, b):
     d, x = a, x2
     return d, x
 
-
 def checkKey(matrix, modulo):
     determinant = getMatrixDeterminant(matrix)
     d, x = extEucAlg(determinant, modulo)
     return d == 1
-
 
 def matrixMultiply(M1, M2):
     transp_M2 = transposeMatrix(M2)
@@ -25,14 +23,11 @@ def matrixMultiply(M1, M2):
     else:
         return [[sum(ele_M1 * ele_M2 for ele_M1, ele_M2 in zip(row_M1, col_M2)) for col_M2 in transp_M2] for row_M1 in M1]
 
-
 def transposeMatrix(m):
     return list(map(list, zip(*m)))
 
-
 def getMatrixMinor(m, i, j):
     return [row[:j] + row[j + 1:] for row in (m[:i] + m[i + 1:])]
-
 
 def getMatrixDeterminant(m):
     if len(m) == 2:
@@ -41,7 +36,6 @@ def getMatrixDeterminant(m):
     for c in range(len(m)):
         determinant += ((-1) ** c) * m[0][c] * getMatrixDeterminant(getMatrixMinor(m, 0, c))
     return determinant
-
 
 def getAlgebraicComplement(m):
     if len(m) == 2:
@@ -55,14 +49,12 @@ def getAlgebraicComplement(m):
         cofactors.append(cofactorRow)
     return cofactors
 
-
 def getNewKey(i, keys, action):
     if action == 'e':
         keys[i] = matrixMultiply(keys[i - 1], keys[i - 2])
     if action == 'd':
         keys[i] = matrixMultiply(keys[i - 2], keys[i - 1])
     return keys[i]
-
 
 def reverseMatrix(matrix, modulo):
     determinant = getMatrixDeterminant(matrix)
@@ -71,7 +63,6 @@ def reverseMatrix(matrix, modulo):
     reversedDeterminant = coefficient % modulo
     reversedMatrix = transposeMatrix([[(element * reversedDeterminant) % modulo for element in block] for block in algebraicComplement])
     return reversedMatrix
-
 
 def hillRecurrentCypher(key1, key2, message, action):
     matrixSize = int(sqrt(len(key1)))
@@ -83,9 +74,9 @@ def hillRecurrentCypher(key1, key2, message, action):
 
     if (checkKey(keyMatrix1, len(alphabet)) != 1) and (checkKey(keyMatrix2, len(alphabet)) != 1):
         return 'Оба ключа не подходят, поскольку детерминанты их матрицы не входят в группу обратимых элементов кольца.'
-    if checkKey(keyMatrix1, len(alphabet)) != 1:
+    elif checkKey(keyMatrix1, len(alphabet)) != 1:
         return 'Первый ключ не подходит, поскольку детерминант его матрицы не входит в группу обратимых элементов кольца.'
-    if checkKey(keyMatrix2, len(alphabet)) != 1:
+    elif checkKey(keyMatrix2, len(alphabet)) != 1:
         return 'Второй ключ не подходит, поскольку детерминант его матрицы не входит в группу обратимых элементов кольца.'
 
     keys = {1: keyMatrix1, 2: keyMatrix2}
@@ -106,7 +97,6 @@ def hillRecurrentCypher(key1, key2, message, action):
             for element in block:
                 encrypted += alphabet[element % len(alphabet)]
         return encrypted
-
     elif action == 'd':
         decrypted = ''
         decryptedBlocks = []
