@@ -1,11 +1,9 @@
 import random
 
-
 def eucAlg(a, b):
     while b != 0:
         a, b = b, a % b
     return a
-
 
 def extEucAlg(a, b):
     x2, x1, y2, y1 = 1, 0, 0, 1
@@ -16,14 +14,12 @@ def extEucAlg(a, b):
     d, x, y = a, x2, y2
     return d, x, y
 
-
 def modInv(a, m):
     d, x, y = extEucAlg(a, m)
     if d == 1:
         return x % m
     else:
         return None
-
 
 def quickMulti(a, k, n):
     b = 1
@@ -38,7 +34,6 @@ def quickMulti(a, k, n):
             b = (A * b) % n
     return b
 
-
 def testFermat(n, t):
     for i in range(1, t):
         a = random.randrange(2, n - 1)
@@ -46,7 +41,6 @@ def testFermat(n, t):
         if r != 1:
             return False
     return True
-
 
 def genKey(p, q):
     n = p * q # модуль алгоритма
@@ -59,16 +53,13 @@ def genKey(p, q):
     d = modInv(e, φ)
     return (e, n), d
 
-
 def encrypt(keyPair, m):
     c = quickMulti(m, keyPair[0], keyPair[1])
     return c
 
-
 def decrypt(d, c, modulo):
     m = quickMulti(c, d, modulo)
     return m
-
 
 def main():
     role = input('Введите вашу роль (A, B): ')
